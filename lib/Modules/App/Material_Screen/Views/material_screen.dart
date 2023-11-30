@@ -29,26 +29,12 @@ class Material_Screen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (Platform.isIOS) ...[
-              Text("This is Ios"),
-            ] else if (Platform.isAndroid) ...[
-              Text("This is Android"),
-            ] else if (Platform.isMacOS) ...[
-              Text("This is Android"),
-            ]
+            CircularProgressIndicator(),
+            TextButton(onPressed: () {}, child: Text("Text Button")),
+            ElevatedButton(onPressed: () {}, child: Text("Material Button")),
           ],
         ),
       ),
-      // body: Center(
-      //   child: Column(
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: [
-      //       CircularProgressIndicator(),
-      //       TextButton(onPressed: () {}, child: Text("Text Button")),
-      //       ElevatedButton(onPressed: () {}, child: Text("Material Button")),
-      //     ],
-      //   ),
-      // ),
     );
   }
 }
