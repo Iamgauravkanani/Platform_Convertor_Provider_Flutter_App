@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:platform_convertor_11/Modules/utils/Platform_Provider/Provider/platform_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:platform_convertor_11/Modules/App/Material_Screen/Views/material_screen.dart';
-
 import 'Modules/App/Cupertino_Screen/Views/cupertino_screen.dart';
 
 void main() {

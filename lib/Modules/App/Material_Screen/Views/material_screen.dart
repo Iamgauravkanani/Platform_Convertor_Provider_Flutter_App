@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:platform_convertor_11/Modules/utils/Platform_Provider/Provider/platform_provider.dart';
 import 'package:provider/provider.dart';
@@ -27,12 +29,26 @@ class Material_Screen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CircularProgressIndicator(),
-            TextButton(onPressed: () {}, child: Text("Text Button")),
-            ElevatedButton(onPressed: () {}, child: Text("Material Button")),
+            if (Platform.isIOS) ...[
+              Text("This is Ios"),
+            ] else if (Platform.isAndroid) ...[
+              Text("This is Android"),
+            ] else if (Platform.isMacOS) ...[
+              Text("This is Android"),
+            ]
           ],
         ),
       ),
+      // body: Center(
+      //   child: Column(
+      //     mainAxisAlignment: MainAxisAlignment.center,
+      //     children: [
+      //       CircularProgressIndicator(),
+      //       TextButton(onPressed: () {}, child: Text("Text Button")),
+      //       ElevatedButton(onPressed: () {}, child: Text("Material Button")),
+      //     ],
+      //   ),
+      // ),
     );
   }
 }
