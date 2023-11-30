@@ -1,4 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
+
+import '../../../utils/Platform_Provider/Provider/platform_provider.dart';
 
 class Cupertino_Screen extends StatelessWidget {
   const Cupertino_Screen({super.key});
@@ -10,8 +13,13 @@ class Cupertino_Screen extends StatelessWidget {
         leading: Icon(CupertinoIcons.home),
         middle: Text("Home Screen"),
         trailing: CupertinoSwitch(
-          value: true,
-          onChanged: (val) {},
+          value: Provider.of<PlatformProvider>(context, listen: true)
+              .platform
+              .isIos,
+          onChanged: (val) {
+            Provider.of<PlatformProvider>(context, listen: false)
+                .changePlatform();
+          },
         ),
       ),
       child: Center(
