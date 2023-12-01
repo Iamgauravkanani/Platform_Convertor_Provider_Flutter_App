@@ -10,8 +10,8 @@ class Cupertino_Screen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-        leading: Icon(CupertinoIcons.home),
-        middle: Text("Home Screen"),
+        leading: const Icon(CupertinoIcons.home),
+        middle: const Text("Home Screen"),
         trailing: CupertinoSwitch(
           value: Provider.of<PlatformProvider>(context, listen: true)
               .platform
@@ -26,12 +26,73 @@ class Cupertino_Screen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CupertinoActivityIndicator(
+            const CupertinoActivityIndicator(
               radius: 30,
             ),
-            CupertinoButton(child: Text("Cupertino Button"), onPressed: () {}),
+            CupertinoButton(
+                child: const Text("Cupertino Button"), onPressed: () {}),
             CupertinoButton.filled(
-                child: Text("Cupertino Button"), onPressed: () {}),
+                child: const Text("Cupertino Button"),
+                onPressed: () {
+                  showCupertinoModalPopup(
+                    context: context,
+                    builder: (ctx) => CupertinoActionSheet(
+                      cancelButton: CupertinoActionSheetAction(
+                        onPressed: () {},
+                        isDestructiveAction: true,
+                        child: const Text("Cancel"),
+                      ),
+                      title: const Text("Platform Convertor App"),
+                      message: const Text(
+                          "How is Your Experience After Using this App"),
+                      actions: [
+                        CupertinoActionSheetAction(
+                          onPressed: () {},
+                          isDefaultAction: true,
+                          child: const Text("Good"),
+                        ),
+                        CupertinoActionSheetAction(
+                          onPressed: () {},
+                          isDestructiveAction: true,
+                          child: const Text("Bad"),
+                        ),
+                        CupertinoActionSheetAction(
+                          onPressed: () {},
+                          child: const Text("Neutral"),
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+            const SizedBox(
+              height: 20,
+            ),
+            CupertinoContextMenu(
+              actions: [
+                CupertinoContextMenuAction(
+                  onPressed: () {},
+                  isDefaultAction: true,
+                  child: const Text("Like"),
+                ),
+                const CupertinoContextMenuAction(
+                  child: Text("Comment"),
+                ),
+                const CupertinoContextMenuAction(
+                  isDestructiveAction: true,
+                  child: Text("Share"),
+                ),
+              ],
+              child: Container(
+                height: 100,
+                width: 100,
+                decoration: const BoxDecoration(
+                    image: DecorationImage(
+                  image: NetworkImage(
+                      "https://files.worldwildlife.org/wwfcmsprod/images/Panda_in_Tree/hero_small/99i33zyc0l_Large_WW170579.jpg"),
+                  fit: BoxFit.cover,
+                )),
+              ),
+            ),
           ],
         ),
       ),
