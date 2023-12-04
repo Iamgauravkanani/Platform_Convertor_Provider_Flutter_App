@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-
 import '../../../utils/Platform_Provider/Provider/platform_provider.dart';
 
 class Cupertino_Screen extends StatelessWidget {
@@ -86,11 +85,12 @@ class Cupertino_Screen extends StatelessWidget {
                 height: 100,
                 width: 100,
                 decoration: const BoxDecoration(
-                    image: DecorationImage(
-                  image: NetworkImage(
-                      "https://files.worldwildlife.org/wwfcmsprod/images/Panda_in_Tree/hero_small/99i33zyc0l_Large_WW170579.jpg"),
-                  fit: BoxFit.cover,
-                )),
+                  image: DecorationImage(
+                    image: NetworkImage(
+                        "https://files.worldwildlife.org/wwfcmsprod/images/Panda_in_Tree/hero_small/99i33zyc0l_Large_WW170579.jpg"),
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
             ),
           ],

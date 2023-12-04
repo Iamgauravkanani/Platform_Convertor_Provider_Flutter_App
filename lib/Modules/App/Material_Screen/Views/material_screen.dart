@@ -2,6 +2,7 @@
 
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:platform_convertor_11/Modules/App/Material_Screen/Providers/Date_Picker_Provider/date_picker_provider.dart';
 import 'package:platform_convertor_11/Modules/utils/Platform_Provider/Provider/platform_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -13,9 +14,9 @@ class Material_Screen extends StatelessWidget {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        title: Text("Home Screen"),
+        title: const Text("Home Screen"),
         centerTitle: true,
-        leading: Icon(Icons.home),
+        leading: const Icon(Icons.home),
         actions: [
           Switch(
               value: Provider.of<PlatformProvider>(context, listen: true)
@@ -31,7 +32,7 @@ class Material_Screen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CircularProgressIndicator(),
+            const CircularProgressIndicator(),
             TextButton(
                 onPressed: () {
                   scaffoldKey.currentState?.showBottomSheet(
@@ -43,18 +44,16 @@ class Material_Screen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            child: IconButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              icon: Icon(Icons.camera),
-                            ),
+                          IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: const Icon(Icons.camera),
                           ),
                           Container(
                             child: IconButton(
                               onPressed: () {},
-                              icon: Icon(Icons.photo),
+                              icon: const Icon(Icons.photo),
                             ),
                           ),
                         ],
@@ -62,7 +61,7 @@ class Material_Screen extends StatelessWidget {
                     ),
                   );
                 },
-                child: Text("Show Bottom Sheet")),
+                child: const Text("Show Bottom Sheet")),
             ElevatedButton(
               onPressed: () {
                 showModalBottomSheet(
@@ -73,7 +72,33 @@ class Material_Screen extends StatelessWidget {
                   ),
                 );
               },
-              child: Text("Show Modal BottomSheet"),
+              child: const Text("Show Modal BottomSheet"),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  onPressed: () async {
+                    DateTime? pickedDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2001),
+                      lastDate: DateTime(2050),
+                    );
+
+                    Provider.of<DatePickerProvider>(context, listen: false)
+                        .pickDate(datetime: pickedDate!);
+                  },
+                  icon: const Icon(
+                    Icons.calendar_month,
+                    size: 35,
+                  ),
+                ),
+                Text(
+                    "${Provider.of<DatePickerProvider>(context, listen: true).datePicker.date.day}/"
+                    "${Provider.of<DatePickerProvider>(context, listen: true).datePicker.date.month}/"
+                    "${Provider.of<DatePickerProvider>(context, listen: true).datePicker.date.year}")
+              ],
             ),
           ],
         ),

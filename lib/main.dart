@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:platform_convertor_11/Modules/App/Material_Screen/Providers/Date_Picker_Provider/date_picker_provider.dart';
 import 'package:platform_convertor_11/Modules/utils/Platform_Provider/Provider/platform_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:platform_convertor_11/Modules/App/Material_Screen/Views/material_screen.dart';
@@ -11,6 +12,8 @@ void main() {
         providers: [
           ListenableProvider<PlatformProvider>(
               create: (ctx) => PlatformProvider()),
+          ListenableProvider<DatePickerProvider>(
+              create: (ctx) => DatePickerProvider()),
         ],
         builder: (ctx, _) {
           return (Provider.of<PlatformProvider>(ctx, listen: true)
