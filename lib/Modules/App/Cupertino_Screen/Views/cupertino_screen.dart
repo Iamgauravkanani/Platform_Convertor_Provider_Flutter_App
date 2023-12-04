@@ -1,4 +1,7 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/cupertino.dart';
+import 'package:platform_convertor_11/Modules/App/Material_Screen/Providers/Date_Picker_Provider/date_picker_provider.dart';
 import 'package:provider/provider.dart';
 import '../../../utils/Platform_Provider/Provider/platform_provider.dart';
 
@@ -29,9 +32,33 @@ class Cupertino_Screen extends StatelessWidget {
               radius: 30,
             ),
             CupertinoButton(
-                child: const Text("Cupertino Button"), onPressed: () {}),
+              child: const Text("Cupertino Alert Dialogue"),
+              onPressed: () {
+                showCupertinoModalPopup(
+                  context: context,
+                  builder: (ctx) => CupertinoAlertDialog(
+                    actions: [
+                      CupertinoDialogAction(
+                        onPressed: () {},
+                        isDefaultAction: true,
+                        child: const Text("Yes"),
+                      ),
+                      CupertinoDialogAction(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        isDestructiveAction: true,
+                        child: const Text("No"),
+                      ),
+                    ],
+                    title: const Text("Cupertino Alert Dialogue"),
+                    content: const Text("Are you Sure to Leave the App?"),
+                  ),
+                );
+              },
+            ),
             CupertinoButton.filled(
-                child: const Text("Cupertino Button"),
+                child: const Text("Date Picker"),
                 onPressed: () {
                   showCupertinoModalPopup(
                     context: context,
@@ -42,8 +69,22 @@ class Cupertino_Screen extends StatelessWidget {
                         child: const Text("Cancel"),
                       ),
                       title: const Text("Platform Convertor App"),
-                      message: const Text(
-                          "How is Your Experience After Using this App"),
+                      message: SizedBox(
+                        height: 200,
+                        child: CupertinoDatePicker(
+                          mode: CupertinoDatePickerMode.date,
+                          initialDateTime: Provider.of<DatePickerProvider>(
+                                  context,
+                                  listen: true)
+                              .datePicker
+                              .date,
+                          onDateTimeChanged: (DateTime value) {
+                            Provider.of<DatePickerProvider>(context,
+                                    listen: false)
+                                .pickDate(datetime: value);
+                          },
+                        ),
+                      ),
                       actions: [
                         CupertinoActionSheetAction(
                           onPressed: () {},
@@ -93,6 +134,10 @@ class Cupertino_Screen extends StatelessWidget {
                 ),
               ),
             ),
+            Text(
+                "${Provider.of<DatePickerProvider>(context, listen: true).datePicker.date.day}/"
+                "${Provider.of<DatePickerProvider>(context, listen: true).datePicker.date.month}/"
+                "${Provider.of<DatePickerProvider>(context, listen: true).datePicker.date.year}")
           ],
         ),
       ),
