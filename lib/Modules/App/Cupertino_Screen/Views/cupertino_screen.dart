@@ -1,6 +1,5 @@
 // ignore_for_file: camel_case_types
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:platform_convertor_11/Modules/App/Material_Screen/Providers/Date_Picker_Provider/date_picker_provider.dart';
 import 'package:provider/provider.dart';
 import '../../../utils/Platform_Provider/Provider/platform_provider.dart';
@@ -10,6 +9,8 @@ class Cupertino_Screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateTime datetime =
+        Provider.of<DatePickerProvider>(context, listen: true).datePicker.date;
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         leading: const Icon(CupertinoIcons.home),
@@ -31,7 +32,10 @@ class Cupertino_Screen extends StatelessWidget {
             const CupertinoActivityIndicator(
               radius: 30,
             ),
-            CupertinoButton(
+            SizedBox(
+              height: 10,
+            ),
+            CupertinoButton.filled(
               child: const Text("Cupertino Alert Dialogue"),
               onPressed: () {
                 showCupertinoModalPopup(
@@ -57,6 +61,9 @@ class Cupertino_Screen extends StatelessWidget {
                 );
               },
             ),
+            SizedBox(
+              height: 10,
+            ),
             CupertinoButton.filled(
                 child: const Text("Date Picker"),
                 onPressed: () {
@@ -73,6 +80,56 @@ class Cupertino_Screen extends StatelessWidget {
                         height: 200,
                         child: CupertinoDatePicker(
                           mode: CupertinoDatePickerMode.date,
+                          initialDateTime: Provider.of<DatePickerProvider>(
+                                  context,
+                                  listen: true)
+                              .datePicker
+                              .date,
+                          onDateTimeChanged: (DateTime value) {
+                            Provider.of<DatePickerProvider>(context,
+                                    listen: false)
+                                .pickDate(datetime: value);
+                          },
+                        ),
+                      ),
+                      actions: [
+                        CupertinoActionSheetAction(
+                          onPressed: () {},
+                          isDefaultAction: true,
+                          child: const Text("Good"),
+                        ),
+                        CupertinoActionSheetAction(
+                          onPressed: () {},
+                          isDestructiveAction: true,
+                          child: const Text("Bad"),
+                        ),
+                        CupertinoActionSheetAction(
+                          onPressed: () {},
+                          child: const Text("Neutral"),
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+            SizedBox(
+              height: 10,
+            ),
+            CupertinoButton.filled(
+                child: const Text("Time Picker"),
+                onPressed: () {
+                  showCupertinoModalPopup(
+                    context: context,
+                    builder: (ctx) => CupertinoActionSheet(
+                      cancelButton: CupertinoActionSheetAction(
+                        onPressed: () {},
+                        isDestructiveAction: true,
+                        child: const Text("Cancel"),
+                      ),
+                      title: const Text("Platform Convertor App"),
+                      message: SizedBox(
+                        height: 200,
+                        child: CupertinoDatePicker(
+                          mode: CupertinoDatePickerMode.time,
                           initialDateTime: Provider.of<DatePickerProvider>(
                                   context,
                                   listen: true)
@@ -134,10 +191,8 @@ class Cupertino_Screen extends StatelessWidget {
                 ),
               ),
             ),
-            Text(
-                "${Provider.of<DatePickerProvider>(context, listen: true).datePicker.date.day}/"
-                "${Provider.of<DatePickerProvider>(context, listen: true).datePicker.date.month}/"
-                "${Provider.of<DatePickerProvider>(context, listen: true).datePicker.date.year}"),
+            Text("${datetime.day}/${datetime.month}/${datetime.year}"),
+            Text("${datetime.hour} : ${datetime.minute}"),
           ],
         ),
       ),
