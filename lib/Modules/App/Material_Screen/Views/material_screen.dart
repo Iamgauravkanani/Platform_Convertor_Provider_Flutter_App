@@ -1,16 +1,22 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, use_build_context_synchronously
 
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:platform_convertor_11/Modules/App/Material_Screen/Providers/Date_Picker_Provider/date_picker_provider.dart';
+import 'package:platform_convertor_11/Modules/App/Material_Screen/Providers/Time_Picker_Provider/time_picker_provider.dart';
 import 'package:platform_convertor_11/Modules/utils/Platform_Provider/Provider/platform_provider.dart';
 import 'package:provider/provider.dart';
 
 class Material_Screen extends StatelessWidget {
   Material_Screen({super.key});
+
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+    TimeOfDay time =
+        Provider.of<TimePickerProvider>(context, listen: true).timePicker.time;
+    DateTime date =
+        Provider.of<DatePickerProvider>(context, listen: true).datePicker.date;
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
@@ -94,10 +100,28 @@ class Material_Screen extends StatelessWidget {
                     size: 35,
                   ),
                 ),
-                Text(
-                    "${Provider.of<DatePickerProvider>(context, listen: true).datePicker.date.day}/"
-                    "${Provider.of<DatePickerProvider>(context, listen: true).datePicker.date.month}/"
-                    "${Provider.of<DatePickerProvider>(context, listen: true).datePicker.date.year}")
+                Text("${date.day}/${date.month}/${date.year}"),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  onPressed: () async {
+                    TimeOfDay? time = await showTimePicker(
+                      context: context,
+                      initialTime: TimeOfDay.now(),
+                    );
+
+                    Provider.of<TimePickerProvider>(context, listen: false)
+                        .pickTime(pickedtime: time!);
+                  },
+                  icon: const Icon(
+                    Icons.watch,
+                    size: 35,
+                  ),
+                ),
+                Text("${time.hour}:${time.minute}"),
               ],
             ),
           ],
