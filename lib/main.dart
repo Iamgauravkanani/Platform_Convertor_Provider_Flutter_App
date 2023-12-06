@@ -6,6 +6,7 @@ import 'package:platform_convertor_11/Modules/utils/Platform_Provider/Provider/p
 import 'package:provider/provider.dart';
 import 'package:platform_convertor_11/Modules/App/Material_Screen/Views/material_screen.dart';
 import 'Modules/App/Cupertino_Screen/Views/cupertino_screen.dart';
+import 'Modules/App/Material_Screen/Providers/BottomNavigationBar_Provider/navigation_bar_provider.dart';
 
 void main() {
   runApp(
@@ -14,6 +15,7 @@ void main() {
           ListenableProvider(create: (ctx) => PlatformProvider()),
           ListenableProvider(create: (ctx) => DatePickerProvider()),
           ListenableProvider(create: (ctx) => TimePickerProvider()),
+          ListenableProvider(create: (ctx) => NavigationProvider()),
         ],
         builder: (ctx, _) {
           return (Provider.of<PlatformProvider>(ctx, listen: true)
