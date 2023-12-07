@@ -114,7 +114,6 @@ class Message_Screen extends StatelessWidget {
             ),
             CupertinoSlidingSegmentedControl(
               thumbColor: CupertinoColors.destructiveRed,
-              backgroundColor: CupertinoColors.activeGreen,
               groupValue: Provider.of<Segment_Provider>(context, listen: true)
                   .segment_model
                   .selected_segment,
