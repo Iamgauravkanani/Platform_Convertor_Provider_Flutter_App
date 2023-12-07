@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:platform_convertor_11/Modules/App/Components/Cupertino_Tabs/Call_Screen/Provider/Slider_Provider/slider_provider.dart';
+import 'package:platform_convertor_11/Modules/App/Components/Cupertino_Tabs/Message_Screen/Provider/Segment_Provider/segment_provider.dart';
 import 'package:provider/provider.dart';
-
 import '../../../../../utils/Platform_Provider/Provider/platform_provider.dart';
 import '../../../../Material_Screen/Providers/Date_Picker_Provider/date_picker_provider.dart';
 
@@ -30,7 +31,7 @@ class Call_Screen extends StatelessWidget {
             const CupertinoActivityIndicator(
               radius: 30,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             CupertinoButton.filled(
@@ -59,7 +60,7 @@ class Call_Screen extends StatelessWidget {
                 );
               },
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             CupertinoButton.filled(
@@ -109,9 +110,31 @@ class Call_Screen extends StatelessWidget {
                     ),
                   );
                 }),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
+            CupertinoSlider(
+                value: Provider.of<Slider_Provider>(context, listen: true)
+                    .slider_model
+                    .slider_val,
+                onChanged: (val) {
+                  Provider.of<Slider_Provider>(context, listen: false)
+                      .changeSlider(val: val);
+                }),
+            CupertinoSegmentedControl(
+              groupValue: Provider.of<Segment_Provider>(context, listen: true)
+                  .segment_model
+                  .selected_segment,
+              children: const <int, Widget>{
+                0: Center(child: Text("Red")),
+                1: Center(child: Text("Blue")),
+                2: Center(child: Text("Green")),
+              },
+              onValueChanged: (int val) {
+                Provider.of<Segment_Provider>(context, listen: false)
+                    .changeVal(val: val);
+              },
+            )
           ],
         ),
       ),

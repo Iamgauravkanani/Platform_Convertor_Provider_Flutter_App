@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:platform_convertor_11/Modules/App/Components/Cupertino_Tabs/Call_Screen/Provider/Slider_Provider/slider_provider.dart';
+import 'package:platform_convertor_11/Modules/App/Components/Cupertino_Tabs/Message_Screen/Provider/Segment_Provider/segment_provider.dart';
 import 'package:platform_convertor_11/Modules/App/Material_Screen/Providers/Date_Picker_Provider/date_picker_provider.dart';
 import 'package:platform_convertor_11/Modules/App/Material_Screen/Providers/Time_Picker_Provider/time_picker_provider.dart';
 import 'package:platform_convertor_11/Modules/utils/Platform_Provider/Provider/platform_provider.dart';
@@ -16,6 +18,8 @@ void main() {
           ListenableProvider(create: (ctx) => DatePickerProvider()),
           ListenableProvider(create: (ctx) => TimePickerProvider()),
           ListenableProvider(create: (ctx) => NavigationProvider()),
+          ListenableProvider(create: (ctx) => Slider_Provider()),
+          ListenableProvider(create: (ctx) => Segment_Provider()),
         ],
         builder: (ctx, _) {
           return (Provider.of<PlatformProvider>(ctx, listen: true)
