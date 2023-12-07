@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../../utils/Platform_Provider/Provider/platform_provider.dart';
 import '../../../../Material_Screen/Providers/Date_Picker_Provider/date_picker_provider.dart';
+import '../Provider/Segment_Provider/segment_provider.dart';
 
 class Message_Screen extends StatelessWidget {
   const Message_Screen({super.key});
@@ -108,6 +109,25 @@ class Message_Screen extends StatelessWidget {
             ),
             Text("${datetime.day}/${datetime.month}/${datetime.year}"),
             Text("${datetime.hour} : ${datetime.minute}"),
+            const SizedBox(
+              height: 10,
+            ),
+            CupertinoSlidingSegmentedControl(
+              thumbColor: CupertinoColors.destructiveRed,
+              backgroundColor: CupertinoColors.activeGreen,
+              groupValue: Provider.of<Segment_Provider>(context, listen: true)
+                  .segment_model
+                  .selected_segment,
+              children: const <int, Widget>{
+                0: Center(child: Text("Red")),
+                1: Center(child: Text("Blue")),
+                2: Center(child: Text("Green")),
+              },
+              onValueChanged: (val) {
+                Provider.of<Segment_Provider>(context, listen: false)
+                    .changeVal(val: val!);
+              },
+            )
           ],
         ),
       ),
