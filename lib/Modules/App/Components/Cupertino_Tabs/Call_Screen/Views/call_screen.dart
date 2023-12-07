@@ -71,7 +71,7 @@ class Call_Screen extends StatelessWidget {
                       cancelButton: CupertinoActionSheetAction(
                         onPressed: () {},
                         isDestructiveAction: true,
-                        child: const Text("Cancel"),
+                        child: const Text("cancel"),
                       ),
                       title: const Text("Platform Convertor App"),
                       message: SizedBox(
