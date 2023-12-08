@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../../utils/Platform_Provider/Provider/platform_provider.dart';
 
 class Call_Screen extends StatelessWidget {
   Call_Screen({super.key});
@@ -7,6 +10,21 @@ class Call_Screen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      appBar: AppBar(
+        title: const Text("Home Screen"),
+        centerTitle: true,
+        leading: const Icon(Icons.home),
+        actions: [
+          Switch(
+              value: Provider.of<PlatformProvider>(context, listen: true)
+                  .platform
+                  .isIos,
+              onChanged: (val) {
+                Provider.of<PlatformProvider>(context, listen: false)
+                    .changePlatform();
+              }),
+        ],
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

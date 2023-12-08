@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../../../utils/Platform_Provider/Provider/platform_provider.dart';
 import '../../../../Material_Screen/Providers/Date_Picker_Provider/date_picker_provider.dart';
 import '../../../../Material_Screen/Providers/Time_Picker_Provider/time_picker_provider.dart';
 
@@ -13,6 +14,21 @@ class Message_Screen extends StatelessWidget {
     DateTime date =
         Provider.of<DatePickerProvider>(context, listen: true).datePicker.date;
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Home Screen"),
+        centerTitle: true,
+        leading: const Icon(Icons.home),
+        actions: [
+          Switch(
+              value: Provider.of<PlatformProvider>(context, listen: true)
+                  .platform
+                  .isIos,
+              onChanged: (val) {
+                Provider.of<PlatformProvider>(context, listen: false)
+                    .changePlatform();
+              }),
+        ],
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
