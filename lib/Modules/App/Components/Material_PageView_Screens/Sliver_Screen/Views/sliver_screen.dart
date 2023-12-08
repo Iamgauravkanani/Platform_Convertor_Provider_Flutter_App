@@ -7,7 +7,7 @@ class SliverScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         slivers: [
           SliverAppBar(
             stretch: true,
@@ -39,22 +39,75 @@ class SliverScreen extends StatelessWidget {
             ),
           ),
           SliverList(
+            delegate: SliverChildListDelegate(
+              Colors.primaries
+                  .map((e) => Container(
+                        height: 200,
+                        color: e,
+                        alignment: Alignment.center,
+                        child: const Text(
+                          "Sliver List",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ))
+                  .toList(),
+            ),
+          ),
+          SliverList(
             delegate: SliverChildBuilderDelegate(
               childCount: 18,
               (context, index) => Container(
                 height: 100,
                 color: Colors.primaries[index],
+                alignment: Alignment.center,
+                child: Text(
+                  "Sliver List Builder $index",
+                  style: const TextStyle(color: Colors.white),
+                ),
               ),
             ),
-            // delegate: SliverChildListDelegate(
-            //   Colors.primaries
-            //       .map((e) => Container(
-            //             height: 200,
-            //             color: e,
-            //           ))
-            //       .toList(),
-            // ),
-          )
+          ),
+          SliverGrid(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 5,
+              crossAxisSpacing: 5,
+              mainAxisExtent: 200,
+            ),
+            delegate: SliverChildListDelegate(
+              Colors.primaries
+                  .map((e) => Container(
+                        height: 200,
+                        color: e,
+                        alignment: Alignment.center,
+                        child: const Text(
+                          "Sliver Grid",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ))
+                  .toList(),
+            ),
+          ),
+          SliverGrid(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 5,
+              crossAxisSpacing: 5,
+              mainAxisExtent: 100,
+            ),
+            delegate: SliverChildBuilderDelegate(
+              childCount: 18,
+              (context, index) => Container(
+                height: 100,
+                color: Colors.primaries[index],
+                alignment: Alignment.center,
+                child: Text(
+                  "Sliver Grid Builder $index",
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
