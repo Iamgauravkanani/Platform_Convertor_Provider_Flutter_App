@@ -39,12 +39,22 @@ class SliverScreen extends StatelessWidget {
             ),
           ),
           SliverList(
-              delegate: SliverChildListDelegate(Colors.primaries
-                  .map((e) => Container(
-                        height: 200,
-                        color: e,
-                      ))
-                  .toList()))
+            delegate: SliverChildBuilderDelegate(
+              childCount: 18,
+              (context, index) => Container(
+                height: 100,
+                color: Colors.primaries[index],
+              ),
+            ),
+            // delegate: SliverChildListDelegate(
+            //   Colors.primaries
+            //       .map((e) => Container(
+            //             height: 200,
+            //             color: e,
+            //           ))
+            //       .toList(),
+            // ),
+          )
         ],
       ),
     );
