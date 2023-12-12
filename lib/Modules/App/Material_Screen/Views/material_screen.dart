@@ -20,10 +20,10 @@ class Material_Screen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.green,
+        // backgroundColor: Colors.green,
         iconSize: 24,
         selectedFontSize: 18,
-        selectedItemColor: Colors.yellow,
+        // selectedItemColor: Colors.yellow,
         showSelectedLabels: true,
         showUnselectedLabels: true,
         selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
@@ -39,8 +39,7 @@ class Material_Screen extends StatelessWidget {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.phone), label: "call"),
           BottomNavigationBarItem(icon: Icon(Icons.message), label: "message"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.settings), label: "settings"),
+          BottomNavigationBarItem(icon: Icon(Icons.list), label: "slivers"),
         ],
       ),
       body: PageView(
